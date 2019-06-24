@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大事件-后台登录页</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- 引入bootstrap的样式文件 -->
+    <link rel="stylesheet" href="./js/bootstrap/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="main_wrap">
+        <div class="header">
+            <a href="#" class="logo"><img src="images/logo.png" alt=""></a>
+            <div class="copyright">CopyRight © 2019 深圳百秀信息技术股份有限公司<br>All Rights Reserved</div>
+        </div>
+
+        <div class="login_form_con">
+            <div class="login_title"></div>
+            <form class="login_form">
+                <i class="iconfont icon-user"></i>
+                <i class="iconfont icon-key"></i>
+                <input type="text" class="input_txt" placeholder="邮箱/手机号">
+                <input type="password" class="input_pass" placeholder="密码">
+                <input type="submit" class="input_sub" id="btn_login" value="登 录">
+            </form>
+        </div>
+
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">温馨提示!</h4>
+                </div>
+                <div class="modal-body">
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 引入jq文件 -->
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <!-- 引入bootstrap的js文件 -->
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        //入口函数
+        $(function () {
+            /*
+            步骤
+            1.给登录一个点击事件.
+            2.获取用户输入的用户名和密码, 去掉前后空格
+            3.判断是否为空, 
+                    如果为空不要继续,如果不为空就继续
+            4.发送ajax请求,判断账号密码是否正确.
+                    如果正确,跳转到首页; 如果不正确就要提示账号或密码错误.
+            */
+            // 1.给登录一个点击事件.阻止submit按钮的一个默认跳转.
+            $('#btn_login').on('click', function (e) {
+                e.preventDefault();
+                //2.获取用户输入的用户名和密码, 去掉前后空格
+                var userName = $('.input_txt').val().trim();
+                var password = $('.input_pass').val().trim();
+                //判断是否为空, 
+                if (userName == "" || password == "") {
+                    //如果为空不要继续,
+                    // alert("账号或密码为空!");
+                    $('.modal-body').text('账号或密码为空!');
+                    $('#myModal').modal({
+                        keyboard: true
+                    })
+                    return;
+                }
+                //如果不为空就继续
+                //4.发送ajax请求,
+                $.ajax({
+                    type: 'post',
+                    url: 'http://localhost:8000/admin/login',
+                    data: {
+                        user_name: userName,
+                        password: password
+                    },
+                    success: function (backData) {
+                        console.log(backData);
+                        //判断账号密码是否正确.
+                        if (backData.code == 200) {
+                            //如果正确,跳转到首页;
+                            window.location.href = './index.html';
+                        } else {
+                            // alert('账号或者密码错误!');
+                            $('.modal-body').text('账号或者密码错误!');
+                            $('#myModal').modal({
+                                keyboard: true
+                            })
+                        }
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
