@@ -2,81 +2,171 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>文章列表</title>
-    <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/jedate/js/jedate.js"></script>
-    <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="js/tinymce/js/tinymce_setup.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文章列表</title>
+  <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/iconfont.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link type="text/css" rel="stylesheet" href="js/jedate/css/jedate.css">
+  <script src="js/jquery-1.12.4.min.js"></script>
+  <script src="js/jedate/js/jedate.js"></script>
+  <script src="js/tinymce/js/tinymce/tinymce.min.js"></script>
+  <script src="js/tinymce/js/tinymce_setup.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="common_title">
-            文章编辑
-        </div>
-        <div class="container-fluid common_con">
-            <form class="form-horizontal article_form">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" value="文章标题文字">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
-                    <div class="col-sm-10">
-                        <img src="images/pic06.jpg" class="article_cover">
-                        <input type="file" id="exampleInputFile">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
-                    <div class="col-sm-4">
-                        <select class="form-control">
-                            <option>类别一</option>
-                            <option>类别二</option>
-                            <option>类别三</option>
-                            <option selected>类别四</option>
-                            <option>类别五</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
-                    <div class="col-sm-4">
-
-                        <div class="input-group">
-                            <input type="text" class="form-control" value="2019-05-17" id="dateinput">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"
-                                    onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
-                                        class="iconfont icon-icondate"></i></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="rich_content" name="content" placeholder="文章内容" value="文章内容">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success">修改</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+  <div class="container-fluid">
+    <div class="common_title">
+      文章编辑
     </div>
+    <div class="container-fluid common_con">
+      <form class="form-horizontal article_form">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">文章标题：</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" name="title" id="inputEmail3" value="文章标题文字">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">文章封面：</label>
+          <div class="col-sm-10">
+            <img src="images/pic06.jpg" class="article_cover">
+            <input type="file" name="cover" id="exampleInputFile">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">文章类别：</label>
+          <div class="col-sm-4">
+            <select class="form-control lingqi" name="type">
+              <option>类别三</option>
+              <option value="8">軍事</option>
+              <option value="1">科學</option>
+              <option selec>类别四</option>
+              <option>类别五</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">发布时间：</label>
+          <div class="col-sm-4">
+
+            <div class="input-group">
+              <input type="text" class="form-control" name="date" value="2019-05-17" id="dateinput">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"
+                  onclick="jeDate('#dateinput',{trigger:false,format: 'YYYY-MM-DD'})"><i
+                    class="iconfont icon-icondate"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">文章内容：</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="conter" id="rich_content" name="content" placeholder="文章内容"
+              value="文章内容">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success btn-edit">修改</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="./js/template-web.js"></script>
+
+  <script id="muban" type="text/html">
+    {{each data}}
+    <option value="{{$value.id}}">{{$value.name}}</option>
+    {{/each}}
+  </script>
+  <script>
+    // 一进到文章编辑页面, 就要加载所有的文章类别
+    // 发送ajax请求, 获取数据, 通过模板引擎渲染
+    $.ajax({
+      url: 'http://localhost:8000/admin/category_search',
+
+      success: function (backData) {
+        // console.log(backData);
+        if (backData == 200) {
+          var res = template('muban', backData);
+          $('.lingqi').html(res)
+        }
+      }
+    })
+
+
+    // //编辑第一步:
+    var id = window.location.search.split("=")[1];
+    console.log(id);
+    
+    // 1. 给编辑按钮设置点击事件(其实已经有了, 就是编辑按钮是a标签, a标签有href属性指向编辑页.)
+    // 把当前要编辑的文章id给带过去 编辑页.(通过url的拼接带过去)
+    // 2. 在编辑页面 通过url的截取(window.location.search) 拿到文章id
+    // 3. 发送ajax请求(文章搜索的请求), 把这个搜索到的数据显示到编辑页对应的标签上
+    // 注意: 返回的数据 文章类型是id, 我们给用户看的是文章类别名字, 所以处理一下.
+    $.ajax({
+
+      url:'http://localhost:8000/admin/search',
+      data: {
+        id: id
+      },
+      success: function (canshu) {
+        console.log(canshu);
+        if (canshu.code == 200) {
+          $('input.title').val(canshu.data.title); //文章标题
+
+          $('img.article_cover').attr('src', canshu.data.cover); //文章封面
+
+          $('select.type').val(canshu.data.type); //文章类别
+
+          $('input.date').val(canshu.data.date); //文章发布时间
+
+          $('#rich_content').val(canshu.data.content); //内容
+        }
+
+      }
+
+
+    });
+    // 重新获取所有的类型, 显示在那里
+    // //编辑第二步:
+    // 1. 给修改按钮设置一个点击事件
+    // 2. 发送ajax请求, 修改.
+    // 通过formData的数据修改的.
+
+    $('.btn-edit').on('click', function (e) {
+      e.preventDefault();
+      //通过formData的数据修改的.
+      var formData1 = new FormData($('form')[0]);
+      formData1.append('id', id); //需要编辑的文字id
+      formData1.append('content', tinyMCE.activeEditor.getContent()); //富文本编辑器的内容追加到formData中
+      // 2.发送ajax请求,修改.
+      $.ajax({
+        type: 'post',
+        url: 'http://localhost:8000/admin/article_edit',
+        contentType: false,
+        processData: false,
+        data: formData1,
+        success: function (backData) {
+          if (backData.code == 200) {
+            alert('修改成功!');
+          }
+        }
+      });
+    });
+
+    // 重新获取所有的类型, 显示在那里
+    // //编辑第二步:
+    // 1. 给修改按钮设置一个点击事件
+    // 2. 发送ajax请求, 修改.
+    // 通过formData的数据修改的.
+  </script>
 
 </body>
 

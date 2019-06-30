@@ -277,7 +277,7 @@
     <option value="{{$value.id}}">{{$value.name}}</option>
     {{/each}}
   </script>
-
+ 
   <script id="muban2" type="text/html">
     {{each data v}}
     <tr>
@@ -286,14 +286,10 @@
       <td>{{v.author}}</td>
       <td>{{v.type}}</td>
       <td class="text-center">{{v.date}}</td>
-
-
       <td class="text-center">{{v.state}}</td>
-
-
       <td class="text-center">
-        <a href="article_edit.html" data-id="{{v.id}}" class="btn btn-default btn-xs">编辑</a>
-        <a href="javascript" data-id="{{v.id}}" class="btn btn-danger btn-xs">删除</a>
+        <a href="article_edit.html?id={{v.id}}" class="btn btn-default btn-xs">编辑</a>
+        <a href="#" data-id="{{v.id}}" class="btn btn-danger btn-xs btn-delete">删除</a>
       </td>
     </tr>
     {{/each}}
@@ -327,7 +323,7 @@
     function hanshu(canshu1) {
       var cateId = $('#selCategory').val();
       var state = $('#selStatus').val();
-       // 发送ajax请求
+      // 发送ajax请求
       $.ajax({
         url: 'http://localhost:8000/admin/search',
         data: {
@@ -337,20 +333,20 @@
           perpage: 5
         },
         success: function (backData) {
-          console.log(backData);
+          // console.log(backData);
           if (backData.code == 200) {
             var res = template('muban2', backData);
             $('tbody').html(res);
           }
           //页码的调用方法
           var totalPages = backData.totalPage;
-          console.log(totalPages);
-            // 如果当前点击的页码不等于 num 就执行下面的函数
-
+          // console.log(totalPages);
+          // 如果当前点击的页码不等于 num 就执行下面的函数
+          window.currentPage = $pagination.twbsPagination('getCurrentPage');
           if (totalPages != num) {
             num = totalPages;
 
-            var currentPage = $pagination.twbsPagination('getCurrentPage');
+           
             $pagination.twbsPagination('destroy');
             $pagination.twbsPagination($.extend({}, defaultOpts, {
               // 将开始页码设置为 1
@@ -366,6 +362,7 @@
 
 
     //点击筛选按钮搜索文章
+
     $('#btnSearch').on('click', function (e) {
       e.preventDefault();
       hanshu();
@@ -374,14 +371,14 @@
     // 
     // $('#btnSearch').trigger('click'); 
     // 排页分码
-
+    window.currentPage
     var $pagination = $('.pagination');
     var defaultOpts = {
-      
-      first:'首页',
-      prev:'上一页',
-      next:'下一页',
-      last:'最后',
+
+      first: '首页',
+      prev: '上一页',
+      next: '下一页',
+      last: '最后',
       // 将当前页码设置为 num 点击对应的页码
       totalPages: num,
       onPageClick: function (event, page) {
@@ -389,6 +386,29 @@
       }
     };
     $pagination.twbsPagination(defaultOpts);
+
+
+    $('tbody').on('click','.btn-delete',function(){
+     
+      if(confirm('你確定要刪除?')) {
+        var id = $(this).attr('data-id');
+        $.ajax({
+          url:'http://localhost:8000/admin/article_delete',
+          data:{
+            id:id
+          },
+          success:function(backData){
+            console.log(backData);
+            hanshu(window.currentPage);
+            
+          }
+
+        })
+      }
+    })
+
+
+
   </script>
 
 </body>
